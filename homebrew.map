@@ -1,0 +1,486 @@
+Archive member included to satisfy reference by file (symbol)
+
+./lib/libc.a(lib_a-memcpy-stub.o)
+                              rt.o (memcpy)
+./lib/libc.a(lib_a-strcpy.o)  srv.o (strcpy)
+./lib/libc.a(lib_a-strlen.o)  srv.o (strlen)
+./lib/libgcc.a(_udivsi3.o)    main.o (__aeabi_uidiv)
+./lib/libgcc.a(_dvmd_tls.o)   ./lib/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00100100                . = 0x100100
+                0x00100100                . = ALIGN (0x4)
+
+.text           0x00100100     0x2bbc
+                0x00100100                __text_start = .
+ bootloader.o(.text*)
+ .text          0x00100100       0xa0 bootloader.o
+                0x00100100                _Reset
+                0x0010017c                _ReturnToUser
+ *(.text*)
+ .text          0x001001a0      0x234 srv.o
+                0x001001a0                initSrv
+                0x001001f4                exitSrv
+                0x0010022c                srv_RegisterClient
+                0x001002c4                srv_getServiceHandle
+ .text          0x001003d4       0x7c entry.o
+                0x001003d4                c_entry
+                0x00100438                IRQHandler
+ .text          0x00100450      0x3f8 main.o
+                0x00100450                ptmuInit
+                0x00100488                setMaxHP
+                0x001004dc                drawMonsterHP
+                0x001007c4                overlayCallback
+                0x00100814                main
+ .text          0x00100848      0x10c sharedfunc.o
+                0x00100848                initSharedFunc
+ .text          0x00100954      0x628 ov.o
+                0x00100954                ovDrawTranspartBlackRect
+                0x00100bbc                ovDrawPixel
+                0x00100cd4                ovDrawRect
+                0x00100d90                ovDrawChar
+                0x00100eb8                ovDrawString
+ *fill*         0x00100f7c        0x4 
+ .text          0x00100f80      0x29c svc.o
+                0x00100f80                getThreadCommandBuffer
+                0x00100f8c                svc_controlMemory
+                0x00100fac                svc_exitProcess
+                0x00100fb4                svc_createThread
+                0x00100fd4                svc_exitThread
+                0x00100fdc                svc_sleepThread
+                0x00100fe4                svc_createMutex
+                0x00100ff8                svc_releaseMutex
+                0x00101000                svc_releaseSemaphore
+                0x00101014                svc_createEvent
+                0x00101028                svc_signalEvent
+                0x00101030                svc_clearEvent
+                0x00101038                svc_createMemoryBlock
+                0x00101050                svc_mapMemoryBlock
+                0x00101058                svc_unmapMemoryBlock
+                0x00101060                svc_arbitrateAddress
+                0x00101068                svc_closeHandle
+                0x00101070                svc_waitSynchronization1
+                0x00101078                svc_waitSynchronizationN
+                0x00101098                svc_getSystemTick
+                0x001010a0                svc_getSystemInfo
+                0x001010bc                svc_getProcessInfo
+                0x001010d8                svc_connectToPort
+                0x001010ec                svc_sendSyncRequest
+                0x001010f4                svc_getProcessId
+                0x00101108                svc_getThreadId
+                0x0010111c                svc_setThreadIdealProcessor
+                0x00101124                svc_openThread
+                0x00101138                svc_flushProcessDataCache
+                0x00101140                svc_invalidateProcessDataCache
+                0x00101148                svc_queryMemory
+                0x00101150                svc_addCodeSegment
+                0x00101158                svc_openProcess
+                0x0010116c                svc_controlProcessMemory
+                0x00101184                svc_mapProcessMemory
+                0x0010118c                svc_startInterProcessDma
+                0x001011ac                svc_getDmaState
+                0x001011c0                svc_backDoor
+                0x001011c8                svc_getProcessList
+                0x001011dc                svc_getThreadList
+                0x001011f0                svc_getThreadContext
+                0x001011f8                svc_debugActiveProcess
+                0x0010120c                svc_readProcessMemory
+                0x00101214                svc_writeProcessMemory
+ .text          0x0010121c      0x77c rt.o
+                0x0010121c                rtInitLock
+                0x00101248                rtAcquireLock
+                0x00101294                rtReleaseLock
+                0x001012c0                rtAlignToPageSize
+                0x001012f0                rtGetPageOfAddress
+                0x0010131c                rtCheckRemoteMemoryRegionSafeForWrite
+                0x001013c0                rtSafeCopyMemory
+                0x00101450                rtGetFileSize
+                0x00101598                rtLoadFileToBuffer
+                0x00101760                rtGenerateJumpCode
+                0x001017a8                rtInitHook
+                0x0010187c                rtFlushInstructionCache
+                0x001018b8                rtEnableHook
+                0x00101928                rtDisableHook
+ .text          0x00101998      0x2e4 AC.o
+                0x00101998                ACU_cmd1
+                0x00101a5c                ACU_cmd26
+                0x00101b5c                ACU_GetWifiStatus
+                0x00101bd4                ACU_WaitInternetConnection
+ .text          0x00101c7c      0xa84 FS.o
+                0x00101c7c                FSUSER_Initialize
+                0x00101cf4                FSUSER_OpenFile
+                0x00101e28                FSUSER_OpenFileDirectly
+                0x00101f98                FSUSER_OpenArchive
+                0x001020a4                FSUSER_OpenDirectory
+                0x001021a8                FSUSER_CloseArchive
+                0x00102250                FSFILE_Close
+                0x001022b8                FSFILE_Read
+                0x001023a8                FSFILE_Write
+                0x001024a8                FSFILE_GetSize
+                0x00102530                FSFILE_SetSize
+                0x001025c8                FSDIR_Read
+                0x00102698                FSDIR_Close
+ .text          0x00102700       0x98 OS.o
+                0x00102700                OS_ConvertVaddr2Physaddr
+ .text          0x00102798        0x0 SOC.o
+ *fill*         0x00102798        0x8 
+ .text          0x001027a0        0x8 misc.o
+                0x001027a0                sleep
+ .text          0x001027a8      0x184 pm.o
+                0x001027a8                dumpKernel
+                0x001027c0                getCurrentProcessId
+                0x001027ec                getCurrentProcessHandle
+                0x0010289c                protectRemoteMemory
+                0x001028f0                protectMemory
+ .text          0x0010292c       0x38 stub.o
+                0x0010292c                showDbg
+                0x00102934                nsDbgPrint
+                0x0010293c                plgRegisterMenuEntry
+                0x00102944                plgGetSharedServiceHandle
+                0x0010294c                plgRequestMemory
+                0x00102954                plgRegisterCallback
+                0x0010295c                xsprintf
+ .text          0x00102964       0xf0 ./lib/libc.a(lib_a-memcpy-stub.o)
+                0x00102964                memcpy
+ .text          0x00102a54       0xf0 ./lib/libc.a(lib_a-strcpy.o)
+                0x00102a54                strcpy
+ .text          0x00102b44       0x60 ./lib/libc.a(lib_a-strlen.o)
+                0x00102b44                strlen
+ .text          0x00102ba4      0x114 ./lib/libgcc.a(_udivsi3.o)
+                0x00102ba4                __udivsi3
+                0x00102ba4                __aeabi_uidiv
+                0x00102c98                __aeabi_uidivmod
+ .text          0x00102cb8        0x4 ./lib/libgcc.a(_dvmd_tls.o)
+                0x00102cb8                __aeabi_ldiv0
+                0x00102cb8                __aeabi_idiv0
+
+.glue_7         0x00102cbc        0x0
+ .glue_7        0x00102cbc        0x0 linker stubs
+
+.glue_7t        0x00102cbc        0x0
+ .glue_7t       0x00102cbc        0x0 linker stubs
+
+.vfp11_veneer   0x00102cbc        0x0
+ .vfp11_veneer  0x00102cbc        0x0 linker stubs
+
+.v4_bx          0x00102cbc        0x0
+ .v4_bx         0x00102cbc        0x0 linker stubs
+
+.plt            0x00102cbc        0x0
+ .plt           0x00102cbc        0x0 bootloader.o
+
+.iplt           0x00102cbc        0x0
+ .iplt          0x00102cbc        0x0 bootloader.o
+                0x00102cbc                . = ALIGN (0x4)
+
+.data           0x00102cbc      0x314
+ *(.data)
+ .data          0x00102cbc        0x0 bootloader.o
+ .data          0x00102cbc        0x0 srv.o
+ .data          0x00102cbc        0x0 entry.o
+ .data          0x00102cbc       0x1c main.o
+                0x00102cbc                sdmcArchive
+ .data          0x00102cd8        0x0 sharedfunc.o
+ .data          0x00102cd8      0x2f8 ov.o
+ .data          0x00102fd0        0x0 svc.o
+ .data          0x00102fd0        0x0 rt.o
+ .data          0x00102fd0        0x0 AC.o
+ .data          0x00102fd0        0x0 FS.o
+ .data          0x00102fd0        0x0 OS.o
+ .data          0x00102fd0        0x0 SOC.o
+ .data          0x00102fd0        0x0 misc.o
+ .data          0x00102fd0        0x0 pm.o
+ .data          0x00102fd0        0x0 stub.o
+ .data          0x00102fd0        0x0 ./lib/libc.a(lib_a-memcpy-stub.o)
+ .data          0x00102fd0        0x0 ./lib/libc.a(lib_a-strcpy.o)
+ .data          0x00102fd0        0x0 ./lib/libc.a(lib_a-strlen.o)
+ .data          0x00102fd0        0x0 ./lib/libgcc.a(_udivsi3.o)
+ .data          0x00102fd0        0x0 ./lib/libgcc.a(_dvmd_tls.o)
+
+.dynamic        0x00102fd0       0x88
+ .dynamic       0x00102fd0       0x88 bootloader.o
+                0x00102fd0                _DYNAMIC
+
+.got            0x00103058        0x0
+ .got           0x00103058        0x0 bootloader.o
+
+.got.plt        0x00103058        0xc
+ .got.plt       0x00103058        0xc bootloader.o
+                0x00103058                _GLOBAL_OFFSET_TABLE_
+
+.igot.plt       0x00103064        0x0
+ .igot.plt      0x00103064        0x0 bootloader.o
+                0x00103064                . = ALIGN (0x4)
+                0x00103064                . = ALIGN (0x4)
+
+.rel.dyn        0x00103064      0x130
+ *(.__rel_dyn_start)
+ .__rel_dyn_start
+                0x00103064        0x0 bootloader.o
+ *(.rel*)
+ .rel.got       0x00103064        0x0 bootloader.o
+ .rel.plt       0x00103064        0x0 bootloader.o
+ .rel.iplt      0x00103064        0x0 bootloader.o
+ .rel.text      0x00103064      0x128 bootloader.o
+ .rel.data      0x0010318c        0x8 bootloader.o
+ *(.rel.*)
+ *(.__rel_dyn_end)
+ .__rel_dyn_end
+                0x00103194        0x0 bootloader.o
+                0x00103194                __code_end = .
+
+.interp         0x00103194       0x11
+ .interp        0x00103194       0x11 bootloader.o
+
+.gnu.version_d  0x001031a8        0x0
+ .gnu.version_d
+                0x001031a8        0x0 bootloader.o
+
+.gnu.version    0x001031a6        0x0
+ .gnu.version   0x001031a6        0x0 bootloader.o
+
+.gnu.version_r  0x001031a8        0x0
+ .gnu.version_r
+                0x001031a8        0x0 bootloader.o
+
+.dynsym         0x001031a8       0x30
+ .dynsym        0x001031a8       0x30 bootloader.o
+
+.dynstr         0x001031d8        0x1
+ .dynstr        0x001031d8        0x1 bootloader.o
+
+.hash           0x001031dc       0x18
+ .hash          0x001031dc       0x18 bootloader.o
+
+.rodata         0x001031f4       0xb6
+ .rodata        0x001031f4        0x5 srv.o
+ *fill*         0x001031f9        0x3 
+ .rodata        0x001031fc        0xa main.o
+ *fill*         0x00103206        0x2 
+ .rodata        0x00103208       0x7a rt.o
+ *fill*         0x00103282        0x2 
+ .rodata        0x00103284        0x5 AC.o
+ *fill*         0x00103289        0x3 
+ .rodata        0x0010328c       0x1e pm.o
+                0x001032ac                . = ALIGN (0x4)
+
+.bss            0x001032ac       0x14
+ *(.__bss_start)
+ .__bss_start   0x001032ac        0x0 bootloader.o
+                0x001032ac                __c_bss_start
+ *(.bss COMMON)
+ .bss           0x001032ac        0x0 bootloader.o
+ .bss           0x001032ac        0x4 srv.o
+                0x001032ac                srvHandle
+ .bss           0x001032b0        0x0 entry.o
+ .bss           0x001032b0        0x8 main.o
+                0x001032b0                fsUserHandle
+ .bss           0x001032b8        0x0 sharedfunc.o
+ .bss           0x001032b8        0x0 ov.o
+ .bss           0x001032b8        0x0 svc.o
+ .bss           0x001032b8        0x0 rt.o
+ .bss           0x001032b8        0x0 AC.o
+ .bss           0x001032b8        0x0 FS.o
+ .bss           0x001032b8        0x0 OS.o
+ .bss           0x001032b8        0x0 SOC.o
+ .bss           0x001032b8        0x0 misc.o
+ .bss           0x001032b8        0x8 pm.o
+                0x001032b8                hCurrentProcess
+                0x001032bc                currentPid
+ .bss           0x001032c0        0x0 stub.o
+ .bss           0x001032c0        0x0 ./lib/libc.a(lib_a-memcpy-stub.o)
+ .bss           0x001032c0        0x0 ./lib/libc.a(lib_a-strcpy.o)
+ .bss           0x001032c0        0x0 ./lib/libc.a(lib_a-strlen.o)
+ .bss           0x001032c0        0x0 ./lib/libgcc.a(_udivsi3.o)
+ .bss           0x001032c0        0x0 ./lib/libgcc.a(_dvmd_tls.o)
+ *(.__bss_end)
+ .__bss_end     0x001032c0        0x0 bootloader.o
+                0x001032c0                __c_bss_end
+                0x001032c0                __end__ = .
+LOAD srv.o
+LOAD entry.o
+LOAD main.o
+LOAD sharedfunc.o
+LOAD ov.o
+LOAD svc.o
+LOAD rt.o
+LOAD AC.o
+LOAD FS.o
+LOAD OS.o
+LOAD bootloader.o
+LOAD SOC.o
+LOAD misc.o
+LOAD pm.o
+LOAD stub.o
+LOAD ./lib/libc.a
+LOAD ./lib/libgcc.a
+OUTPUT(a.out elf32-littlearm)
+
+.dynbss         0x001032c0        0x0
+ .dynbss        0x001032c0        0x0 bootloader.o
+
+.ARM.attributes
+                0x00000000       0x27
+ .ARM.attributes
+                0x00000000       0x19 bootloader.o
+ .ARM.attributes
+                0x00000019       0x2b srv.o
+ .ARM.attributes
+                0x00000044       0x2b entry.o
+ .ARM.attributes
+                0x0000006f       0x2b main.o
+ .ARM.attributes
+                0x0000009a       0x2b sharedfunc.o
+ .ARM.attributes
+                0x000000c5       0x2b ov.o
+ .ARM.attributes
+                0x000000f0       0x19 svc.o
+ .ARM.attributes
+                0x00000109       0x2b rt.o
+ .ARM.attributes
+                0x00000134       0x2b AC.o
+ .ARM.attributes
+                0x0000015f       0x2b FS.o
+ .ARM.attributes
+                0x0000018a       0x2b OS.o
+ .ARM.attributes
+                0x000001b5       0x2b SOC.o
+ .ARM.attributes
+                0x000001e0       0x19 misc.o
+ .ARM.attributes
+                0x000001f9       0x2b pm.o
+ .ARM.attributes
+                0x00000224       0x19 stub.o
+ .ARM.attributes
+                0x0000023d       0x30 ./lib/libc.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000026d       0x30 ./lib/libc.a(lib_a-strcpy.o)
+ .ARM.attributes
+                0x0000029d       0x30 ./lib/libc.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x000002cd       0x18 ./lib/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000002e5       0x18 ./lib/libgcc.a(_dvmd_tls.o)
+
+.comment        0x00000000       0x44
+ .comment       0x00000000       0x22 srv.o
+                                 0x23 (size before relaxing)
+ .comment       0x00000022       0x23 entry.o
+ .comment       0x00000022       0x23 main.o
+ .comment       0x00000022       0x23 sharedfunc.o
+ .comment       0x00000022       0x23 ov.o
+ .comment       0x00000022       0x23 rt.o
+ .comment       0x00000022       0x23 AC.o
+ .comment       0x00000022       0x23 FS.o
+ .comment       0x00000022       0x23 OS.o
+ .comment       0x00000022       0x23 SOC.o
+ .comment       0x00000022       0x23 pm.o
+ .comment       0x00000022       0x22 ./lib/libc.a(lib_a-memcpy-stub.o)
+                                 0x23 (size before relaxing)
+ .comment       0x00000044       0x23 ./lib/libc.a(lib_a-strcpy.o)
+ .comment       0x00000044       0x23 ./lib/libc.a(lib_a-strlen.o)
+
+.debug_info     0x00000000     0x88d4
+ .debug_info    0x00000000      0xa76 srv.o
+ .debug_info    0x00000a76      0xb7d entry.o
+ .debug_info    0x000015f3      0xdd7 main.o
+ .debug_info    0x000023ca      0xc22 sharedfunc.o
+ .debug_info    0x00002fec      0xf57 ov.o
+ .debug_info    0x00003f43      0xfba rt.o
+ .debug_info    0x00004efd      0xaf6 AC.o
+ .debug_info    0x000059f3      0xf86 FS.o
+ .debug_info    0x00006979      0x94c OS.o
+ .debug_info    0x000072c5      0x9e5 SOC.o
+ .debug_info    0x00007caa      0xc2a pm.o
+
+.debug_abbrev   0x00000000     0x1878
+ .debug_abbrev  0x00000000      0x231 srv.o
+ .debug_abbrev  0x00000231      0x22c entry.o
+ .debug_abbrev  0x0000045d      0x2b9 main.o
+ .debug_abbrev  0x00000716      0x1f4 sharedfunc.o
+ .debug_abbrev  0x0000090a      0x278 ov.o
+ .debug_abbrev  0x00000b82      0x2c6 rt.o
+ .debug_abbrev  0x00000e48      0x228 AC.o
+ .debug_abbrev  0x00001070      0x226 FS.o
+ .debug_abbrev  0x00001296      0x1c5 OS.o
+ .debug_abbrev  0x0000145b      0x19d SOC.o
+ .debug_abbrev  0x000015f8      0x280 pm.o
+
+.debug_aranges  0x00000000      0x158
+ .debug_aranges
+                0x00000000       0x20 srv.o
+ .debug_aranges
+                0x00000020       0x20 entry.o
+ .debug_aranges
+                0x00000040       0x20 main.o
+ .debug_aranges
+                0x00000060       0x20 sharedfunc.o
+ .debug_aranges
+                0x00000080       0x20 ov.o
+ .debug_aranges
+                0x000000a0       0x20 rt.o
+ .debug_aranges
+                0x000000c0       0x20 AC.o
+ .debug_aranges
+                0x000000e0       0x20 FS.o
+ .debug_aranges
+                0x00000100       0x20 OS.o
+ .debug_aranges
+                0x00000120       0x18 SOC.o
+ .debug_aranges
+                0x00000138       0x20 pm.o
+
+.debug_line     0x00000000     0x1809
+ .debug_line    0x00000000      0x1ed srv.o
+ .debug_line    0x000001ed      0x210 entry.o
+ .debug_line    0x000003fd      0x26a main.o
+ .debug_line    0x00000667      0x22e sharedfunc.o
+ .debug_line    0x00000895      0x2a7 ov.o
+ .debug_line    0x00000b3c      0x2ba rt.o
+ .debug_line    0x00000df6      0x1eb AC.o
+ .debug_line    0x00000fe1      0x2c2 FS.o
+ .debug_line    0x000012a3      0x1b1 OS.o
+ .debug_line    0x00001454      0x197 SOC.o
+ .debug_line    0x000015eb      0x21e pm.o
+
+.debug_str      0x00000000      0xd73
+ .debug_str     0x00000000      0x543 srv.o
+                                0x5ba (size before relaxing)
+ .debug_str     0x00000543      0x18f entry.o
+                                0x6f3 (size before relaxing)
+ .debug_str     0x000006d2       0xbd main.o
+                                0x796 (size before relaxing)
+ .debug_str     0x0000078f       0xd1 sharedfunc.o
+                                0x7a0 (size before relaxing)
+ .debug_str     0x00000860       0x86 ov.o
+                                0x76b (size before relaxing)
+ .debug_str     0x000008e6      0x1e4 rt.o
+                                0x8c8 (size before relaxing)
+ .debug_str     0x00000aca       0x70 AC.o
+                                0x5cc (size before relaxing)
+ .debug_str     0x00000b3a      0x151 FS.o
+                                0x765 (size before relaxing)
+ .debug_str     0x00000c8b       0x33 OS.o
+                                0x55e (size before relaxing)
+ .debug_str     0x00000cbe       0x3b SOC.o
+                                0x5bd (size before relaxing)
+ .debug_str     0x00000cf9       0x7a pm.o
+                                0x75e (size before relaxing)
+
+.debug_frame    0x00000000      0x790
+ .debug_frame   0x00000000       0x8c srv.o
+ .debug_frame   0x0000008c       0x50 entry.o
+ .debug_frame   0x000000dc       0xb0 main.o
+ .debug_frame   0x0000018c       0x2c sharedfunc.o
+ .debug_frame   0x000001b8       0xb4 ov.o
+ .debug_frame   0x0000026c      0x1d8 rt.o
+ .debug_frame   0x00000444       0x90 AC.o
+ .debug_frame   0x000004d4      0x1e0 FS.o
+ .debug_frame   0x000006b4       0x30 OS.o
+ .debug_frame   0x000006e4       0xac pm.o
