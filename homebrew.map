@@ -449,29 +449,29 @@ OUTPUT(a.out elf32-littlearm)
  .debug_line    0x00001454      0x197 SOC.o
  .debug_line    0x000015eb      0x21e pm.o
 
-.debug_str      0x00000000      0xd73
- .debug_str     0x00000000      0x543 srv.o
-                                0x5ba (size before relaxing)
- .debug_str     0x00000543      0x18f entry.o
-                                0x6f3 (size before relaxing)
- .debug_str     0x000006d2       0xbd main.o
-                                0x796 (size before relaxing)
- .debug_str     0x0000078f       0xd1 sharedfunc.o
-                                0x7a0 (size before relaxing)
- .debug_str     0x00000860       0x86 ov.o
-                                0x76b (size before relaxing)
- .debug_str     0x000008e6      0x1e4 rt.o
-                                0x8c8 (size before relaxing)
- .debug_str     0x00000aca       0x70 AC.o
-                                0x5cc (size before relaxing)
- .debug_str     0x00000b3a      0x151 FS.o
-                                0x765 (size before relaxing)
- .debug_str     0x00000c8b       0x33 OS.o
-                                0x55e (size before relaxing)
- .debug_str     0x00000cbe       0x3b SOC.o
-                                0x5bd (size before relaxing)
- .debug_str     0x00000cf9       0x7a pm.o
-                                0x75e (size before relaxing)
+.debug_str      0x00000000      0xd89
+ .debug_str     0x00000000      0x559 srv.o
+                                0x5d0 (size before relaxing)
+ .debug_str     0x00000559      0x18f entry.o
+                                0x709 (size before relaxing)
+ .debug_str     0x000006e8       0xbd main.o
+                                0x7ac (size before relaxing)
+ .debug_str     0x000007a5       0xd1 sharedfunc.o
+                                0x7b6 (size before relaxing)
+ .debug_str     0x00000876       0x86 ov.o
+                                0x781 (size before relaxing)
+ .debug_str     0x000008fc      0x1e4 rt.o
+                                0x8de (size before relaxing)
+ .debug_str     0x00000ae0       0x70 AC.o
+                                0x5e2 (size before relaxing)
+ .debug_str     0x00000b50      0x151 FS.o
+                                0x77b (size before relaxing)
+ .debug_str     0x00000ca1       0x33 OS.o
+                                0x574 (size before relaxing)
+ .debug_str     0x00000cd4       0x3b SOC.o
+                                0x5d3 (size before relaxing)
+ .debug_str     0x00000d0f       0x7a pm.o
+                                0x774 (size before relaxing)
 
 .debug_frame    0x00000000      0x790
  .debug_frame   0x00000000       0x8c srv.o

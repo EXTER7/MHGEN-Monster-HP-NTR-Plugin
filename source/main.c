@@ -21,8 +21,17 @@ extern u32 getCurrentProcessHandle();
 
 extern void initSharedFunc();
 
+
+#ifdef GAME_REGION_USA
+#define MONSTER_ARRAY_ADDR 0x083343A4
+#endif
+
+#ifdef GAME_REGION_EUR
+#define MONSTER_ARRAY_ADDR 0x08334984
+#endif
+
 // This is where the game stores the active monsters on the current zone.
-static Monster** monster_array = (Monster**)0x083343A4;
+static Monster** monster_array = (Monster**)MONSTER_ARRAY_ADDR;
 
 
 Result ptmuInit(void)
