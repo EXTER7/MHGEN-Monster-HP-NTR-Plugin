@@ -30,6 +30,10 @@ extern void initSharedFunc();
 #define MONSTER_ARRAY_ADDR 0x08334984
 #endif
 
+#ifdef GAME_REGION_EUR
+#define MONSTER_ARRAY_ADDR 0x08325244
+#endif
+
 // This is where the game stores the active monsters on the current zone.
 static Monster** monster_array = (Monster**)MONSTER_ARRAY_ADDR;
 
