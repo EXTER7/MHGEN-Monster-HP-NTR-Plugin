@@ -38,7 +38,8 @@ def build(region,outpath):
 
 run("mkdir -p plugin/0004000000187000")
 run("mkdir -p plugin/0004000000185B00")
+run("mkdir -p plugin/0004000000155400")
 build("USA","plugin/0004000000187000/mhgen.plg")
 build("EUR","plugin/0004000000185B00/mhgen.plg")
-
+build("JPN","plugin/0004000000155400/mhx.plg")
 
