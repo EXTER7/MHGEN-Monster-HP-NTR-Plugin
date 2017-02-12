@@ -5,12 +5,22 @@
 FS_archive sdmcArchive = { 0x9, (FS_path){ PATH_EMPTY, 1, (u8*)"" } };
 Handle fsUserHandle = 0;
 
+// Monster part status
+typedef struct {
+    u16 broken; // 0 = not-broken, 1 = broken
+    u16 stagger; // when this number reaches zero, the monster will stagger
+    u16 cut; // when this number reaches zero the part will be cut off
+} Part;
+
+
 // Active monster information
 typedef struct
 {
-  u8 unknown[0x1318];
+  u8 unknown1[0x1318];
   u32 hp;
   u32 hp_max;
+  u8 unknown2[0x3e];
+  Part parts[8];
 } Monster;
 
 static Handle ptmuHandle;
