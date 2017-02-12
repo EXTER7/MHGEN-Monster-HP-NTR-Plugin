@@ -40,7 +40,7 @@ extern void initSharedFunc();
 #define MONSTER_ARRAY_ADDR 0x08334984
 #endif
 
-#ifdef GAME_REGION_EUR
+#ifdef GAME_REGION_JPN
 #define MONSTER_ARRAY_ADDR 0x08325244
 #endif
 
