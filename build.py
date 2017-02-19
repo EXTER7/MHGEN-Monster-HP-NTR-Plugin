@@ -7,7 +7,7 @@ import glob
 import errno 
 import shutil
 
-DEVKITARM_ERROR = "DevKitARM is not properly set up.\n Make sure the DEVKITARM envorinment variable points to the DevKitARM directory.\n"
+DEVKITARM_ERROR = "DevKitARM is not properly set up.\n Make sure the DEVKITARM environment variable points to the DevKitARM directory.\n"
 
 def copy(files,dest):
   for file in glob.glob(files):
