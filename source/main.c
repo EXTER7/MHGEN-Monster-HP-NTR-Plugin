@@ -9,7 +9,7 @@ Handle fsUserHandle = 0;
 typedef struct {
     u16 broken; // 0 = not-broken, 1 = broken
     u16 stagger; // when this number reaches zero, the monster will stagger
-    u16 cut; // when this number reaches zero the part will be cut off
+    s16 cut; // when this number reaches zero the part will be cut off
 } Part;
 
 
@@ -22,6 +22,13 @@ typedef struct
   u8 unknown2[0x3e];
   Part parts[8];
 } Monster;
+
+typedef struct
+{
+  Monster* monster;
+  s16 max[8];
+  u8 remove;
+} PartMax;
 
 static Handle ptmuHandle;
 
@@ -47,6 +54,9 @@ extern void initSharedFunc();
 // This is where the game stores the active monsters on the current zone.
 static Monster** monster_array = (Monster**)MONSTER_ARRAY_ADDR;
 
+// Max HP of individual monster parts.
+static PartMax part_max[16];
+static s32 part_max_count = 0;
 
 Result ptmuInit(void)
 {
@@ -77,8 +87,54 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
     }
   }
 
+
   if(count > 0)
   {
+    for(u32 i = 0; i < part_max_count;i++)
+    {
+      part_max[i].remove = 1;
+    }
+
+    // Initialize max monster part HP.
+    for(u32 i = 0; i < count;i++)
+    {
+      u8 add = 1;
+      for(u32 j = 0; j < part_max_count; j++)
+      {
+        if(monsters[i] == part_max[j].monster)
+        {
+          // Monster already on list.
+          add = 0;
+          part_max[j].remove = 0;
+          break;
+        }
+      }
+
+      // Add new monster to the list.
+      if(add)
+      {
+        part_max[part_max_count].monster = monsters[i];
+        part_max[part_max_count].remove = 0;
+        for(u32 j = 0; j < 8; j++)
+        {
+          part_max[part_max_count].max[j] = monsters[i]->parts[j].cut;
+        }
+        part_max_count++;
+      }
+    }
+
+    // Cleanup part HP of dead monsters.
+    if(part_max_count > 0)
+    {
+      for(s32 i = part_max_count - 1; i >= 0 ;i--)
+      {
+        if(part_max[i].remove)
+        {
+          part_max[i] = part_max[--part_max_count];
+        }
+      }
+    }
+
     u32 width = 320 / count - 8;
 
     for(u32 i = 0; i < count; i++)
@@ -86,8 +142,8 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
       Monster* m = monsters[i];
       u32 x = (width + 4) * i + 4;
       u32 w = m->hp * width / m->hp_max;
-      ovDrawRect(addr, stride, format, 3, x - 1, 12, width + 2, 255, 255, 255);
-      ovDrawRect(addr, stride, format, 4, x, 10, width, 0, 0, 0);
+      ovDrawRect(addr, stride, format, 2, x - 1, 10, width + 2, 255, 255, 255);
+      ovDrawRect(addr, stride, format, 3, x, 8, width, 0, 0, 0);
 
       u8 r = 0;
       u8 g = 0;
@@ -101,8 +157,52 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
         r = 255;
       }
 
+      ovDrawRect(addr, stride, format, 3, x, 8, w, r, g, 0);
 
-      ovDrawRect(addr, stride, format, 4, x, 10, w, r, g, 0);
+      for(u32 j = 0; j < part_max_count; j++)
+      {
+        if(part_max[j].monster == m)
+        {
+          u8 parts[8];
+          u32 part_count = 0;
+          for(u32 k = 0; k < 8; k++)
+          {
+            if(m->parts[k].cut > 0 && part_max[j].max[k] > 0)
+            {
+               parts[part_count++] = k;
+            }
+          }
+          if( part_count > 0 )
+          {
+            u32 pwidth = width / part_count - 8;
+
+            for(u32 k = 0; k < part_count; k++)
+            {
+              s16 hp = m->parts[parts[k]].cut;
+              s16 hp_max = part_max[j].max[parts[k]];
+              u32 px = (pwidth + 4) * k + x + 4;
+              u32 pw = hp * pwidth / hp_max;
+              ovDrawRect(addr, stride, format, 11, px - 1, 6, pwidth + 2, 255, 255, 255);
+              ovDrawRect(addr, stride, format, 12, px, 4, pwidth, 0, 0, 0);
+
+              r = 0;
+              g = 0;
+
+              if( hp * 5 > hp_max) // 20% part HP
+              {
+                g = 255;
+              }
+              if( hp * 10 < hp_max * 3) // 30% part HP
+              {
+                r = 255;
+              }
+
+              ovDrawRect(addr, stride, format, 12, px, 4, pw, r, g, 0);
+            }
+          }
+          break;
+        }
+      }
     }
     return 0;
   }
