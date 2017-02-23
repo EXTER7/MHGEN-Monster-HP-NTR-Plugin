@@ -5,11 +5,14 @@
 FS_archive sdmcArchive = { 0x9, (FS_path){ PATH_EMPTY, 1, (u8*)"" } };
 Handle fsUserHandle = 0;
 
+#pragma pack(push,1)
+
 // Monster part status
 typedef struct {
-    u16 broken; // 0 = not-broken, 1 = broken
+    u8 break_level;
+    u8 cut; // 0 = not-cut, 1 = cut off
     u16 stagger; // when this number reaches zero, the monster will stagger
-    s16 cut; // when this number reaches zero the part will be cut off
+    s16 hp; // when this number reaches zero the part will be cut off
 } Part;
 
 
@@ -23,12 +26,16 @@ typedef struct
   Part parts[8];
 } Monster;
 
+#pragma pack(pop)
+
+
 typedef struct
 {
   Monster* monster;
   s16 max[8];
   u8 remove;
 } PartMax;
+
 
 static Handle ptmuHandle;
 
@@ -117,7 +124,7 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
         part_max[part_max_count].remove = 0;
         for(u32 j = 0; j < 8; j++)
         {
-          part_max[part_max_count].max[j] = monsters[i]->parts[j].cut;
+          part_max[part_max_count].max[j] = monsters[i]->parts[j].hp;
         }
         part_max_count++;
       }
@@ -167,7 +174,7 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
           u32 part_count = 0;
           for(u32 k = 0; k < 8; k++)
           {
-            if(m->parts[k].cut > 0 && part_max[j].max[k] > 0)
+            if(m->parts[k].hp > 0 && part_max[j].max[k] > 0 && !m->parts[k].cut)
             {
                parts[part_count++] = k;
             }
@@ -178,7 +185,7 @@ u32 drawMonsterHP(u32 addr, u32 stride, u32 format)
 
             for(u32 k = 0; k < part_count; k++)
             {
-              s16 hp = m->parts[parts[k]].cut;
+              s16 hp = m->parts[parts[k]].hp;
               s16 hp_max = part_max[j].max[parts[k]];
               u32 px = (pwidth + 4) * k + x + 4;
               u32 pw = hp * pwidth / hp_max;
