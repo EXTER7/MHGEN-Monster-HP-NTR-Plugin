@@ -1,5 +1,7 @@
 # MHGEN-Monster-HP-NTR-Plugin
 
+##### Note: This repository is no longer maintained.
+
 This NTR plugin displays the HP bars for large monsters during quests on Monster Hunter Generations.
 
 ## Notes
